@@ -1,0 +1,13 @@
+
+//- Param the template variables.
+- title = ( title || "Welcome to my Site" );
+
+doctype html
+html( ng-app = "app" )
+	head
+		title= title
+
+		link( rel = "stylesheet", type = "text/css", href = "/css/app.css" )/
+		script( src = "/js/angular.js" )
+	body
+		block content

@@ -1,0 +1,13 @@
+
+//- Param the template variables.
+- title = ( title || "Server Error" );
+- description = ( description || "An unexpected error occurred. Our team is looking into it." );
+
+doctype html
+html
+	head
+		title= title
+		link( rel = "stylesheet", type = "text/css", href = "/css/app.css" )/
+	body
+		h1= title
+		p= description

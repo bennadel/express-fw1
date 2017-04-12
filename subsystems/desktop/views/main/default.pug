@@ -1,0 +1,144 @@
+extends ../../layouts/main
+
+block content
+	h1.
+		Welcome to My Site
+
+	p.
+		Hello, #[strong #{ user.username }], glad to see you again.
+
+	my-movies
+
+	hr
+	p.
+		Ready to get out of here? #[a( href = "/logout" ) Logout].
+
+
+	script( type = "text/ng-template", id = "/my-movies/template.htm" ).
+
+		<h2>
+			My Movies
+		</h2>
+
+		<ul ng-if="controller.movies.length" class="movies">
+			<li ng-repeat="movie in controller.movies track by movie.id">
+				{{ movie.name }}
+				&mdash;
+				<a ng-click="controller.deleteMovie( movie.id )">Delete</a>
+			</li>
+		</ul>
+
+		<p ng-if="! controller.movies.length">
+			<em>You have no movies stored!</em>
+		</div>
+
+		<form ng-submit="controller.processForm()">
+			<label>
+				<strong>Movie:</strong>
+			</label>
+			<input type="text" ng-model="controller.form.name" size="20" autofocus />
+			<button type="submit">
+				Add Movie
+			</button>
+		</form>
+
+
+	script( type = "text/javascript" ).
+		
+		angular
+			.module( "app", [] )
+			.component(
+				"myMovies",
+				{
+					templateUrl: "/my-movies/template.htm",
+					controllerAs: "controller",
+					controller: function MyMoviesController( $http ) {
+
+						var self = this;
+
+						this.movies = [];
+
+						this.form = {
+							name: ""
+						};
+
+
+						this.$onInit = function() {
+
+							this.loadMovies();
+
+						};
+
+
+						this.processForm = function() {
+
+							if ( ! this.form.name ) {
+
+								return;
+
+							}
+
+							$http
+								.post(
+									"/api/movies",
+									{
+										name: this.form.name
+									}
+								)
+								.then(
+									function( response ) {
+
+										self.form.name = "";
+										self.loadMovies();
+
+									}
+								)
+							;
+
+						};
+
+
+						this.deleteMovie = function( movieId ) {
+
+							$http
+								.delete( "/api/movies/" + movieId )
+								.then(
+									function( response ) {
+
+										self.loadMovies();
+
+									}
+								)
+							;
+
+						};
+
+
+						this.loadMovies = function() {
+
+							$http
+								.get( "/api/movies" )
+								.then(
+									function( response ) {
+
+										self.movies = response.data.data.map(
+											function( movie ) {
+
+												return({
+													id: movie.id,
+													name: movie.name.replace( /^(a|the) (.+)/i, "$2, $1" )
+												});
+
+											}
+										);
+
+									}
+								)
+							;
+
+						};
+
+					}
+				}
+			)
+		;

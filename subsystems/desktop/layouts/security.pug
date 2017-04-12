@@ -1,0 +1,11 @@
+
+//- Param the template variables.
+- title = ( title || "Welcome to my Site" );
+
+doctype html
+html
+	head
+		title= title
+		link( rel = "stylesheet", type = "text/css", href = "/css/app.css" )/
+	body
+		block content

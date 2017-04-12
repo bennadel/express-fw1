@@ -1,0 +1,25 @@
+extends ../../layouts/security
+
+block content
+	
+	h1= title
+
+	if errorMessage
+		p.error.
+			#[strong Sorry]: #{ errorMessage }
+	
+	form( method = "POST", action = "/login" )
+	
+		p.
+			Please enter your login credentials.
+
+		label.
+			#[strong Username]:
+		| 
+		input( name = "username", size="20", autofocus )
+		| 
+		button( type = "submit" ) Login
+
+	hr
+	p.
+		Don't have an account? #[a( href = "/sign-up" ) sign-up].
