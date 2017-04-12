@@ -10,20 +10,11 @@ To continue picking apart middleware functionality, I thought I would try to bui
 (Framework One) inspired flow-of-control middleware on top of the Express.js routing 
 system. 
 
-<iframe 
-	src="https://player.vimeo.com/video/212914857" 
-	width="640"
-	height="360"
-	frameborder="0"
-	webkitallowfullscreen 
-	mozallowfullscreen
-	allowfullscreen
-	style="display: block ; margin: 20px auto 20px auto ;">
-</iframe>
-
-[Read More on my Blog][writeup].
+* **[Watch demo video][video]**.
+* **[Read More on my Blog][writeup]**.
 
 
 [1]: http://www.bennadel.com
 [2]: https://plus.google.com/108976367067760160494?rel=author
+[video]: https://vimeo.com/212914857
 [writeup]: https://www.bennadel.com/blog/3247-an-express-js-learning-experiment---porting-fw-1-ideas-into-a-node-js-application.htm
